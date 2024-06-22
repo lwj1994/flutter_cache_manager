@@ -158,6 +158,7 @@ Future<ui.Image> _decodeImage(File file,
   image
       .resolve(ImageConfiguration.empty)
       .addListener(ImageStreamListener((info, _) {
+    if (completer.isCompleted) return;
     completer.complete(info.image);
     image.evict();
   }));
